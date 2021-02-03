@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 public class StreamOperationExample {
 
     public static void main(String[] args) {
-        ex14();
+        ex15();
     }
 
     // Terminal Operation
@@ -238,5 +238,27 @@ public class StreamOperationExample {
 
     }
 
+
+    // sorted() operation
+    public static void ex15() {
+        List<Person> persons = Arrays.asList(
+                new Person("Erik", "Svensson", Gender.MALE, LocalDate.parse("1976-09-11"), false),
+                new Person("Emil", "Svensson", Gender.MALE, LocalDate.parse("2002-10-23"), false),
+                new Person("Elin", "Karlsson", Gender.MALE, LocalDate.parse("1987-03-11"), false),
+                new Person("Jonas", "Andersson", Gender.MALE, LocalDate.parse("1973-02-20"), false)
+        );
+
+        persons.stream()
+                .sorted((o1, o2) -> o1.getBirthDate().compareTo(o2.getBirthDate()))
+                .forEach(System.out::println);
+        System.out.println("----------------------------------");
+
+        Comparator<Person> lastName = (o1, o2) -> o1.getLastName().compareTo(o2.getLastName());
+        Comparator<Person> firstName = (o1, o2) -> o1.getFirstName().compareTo(o2.getFirstName());
+
+        persons.stream()
+                .sorted(lastName.thenComparing(firstName))
+                .forEach(System.out::println);
+    }
 
 }
