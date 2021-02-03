@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 public class StreamOperationExample {
 
     public static void main(String[] args) {
-        ex15();
+        ex16();
     }
 
     // Terminal Operation
@@ -259,6 +259,16 @@ public class StreamOperationExample {
         persons.stream()
                 .sorted(lastName.thenComparing(firstName))
                 .forEach(System.out::println);
+    }
+
+
+    public static void ex16(){
+        Stream<String> words = Stream.of("Ulf", "Niclas", "Erik", "Kent", "Marcus", "Fredrik");
+       List<String> wordsContainsI = words.filter( s -> s.contains("i"))
+                //.peek(System.out::println) // show output
+               .collect(Collectors.toList());
+        System.out.println("--------------------");
+        wordsContainsI.forEach(System.out::println);
     }
 
 }
